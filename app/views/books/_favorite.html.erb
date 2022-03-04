@@ -1,0 +1,17 @@
+  <% if book.favorited_by?(current_user) %>
+    <td>
+      <%= link_to book_favorites_path(book), method: :delete do %>
+        <div class="no-favorite">
+          <i class="fas fa-heart"></i><%= book.favorites.count %>
+        </div>  
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to book_favorites_path(book), method: :post do %>
+        <div class="yes-favorite">
+          <i class="fas fa-heart"></i><%= book.favorites.count %>
+        </div>  
+      <% end %>
+    </td>
+  <% end %>
