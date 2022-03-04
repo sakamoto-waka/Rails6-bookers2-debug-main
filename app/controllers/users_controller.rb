@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[])
   end
 
   def update
