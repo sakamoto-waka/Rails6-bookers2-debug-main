@@ -1,0 +1,15 @@
+<div>
+  <% book.book_comments.each do |book_comment| %>
+    <%= link_to(book_comment.user) do %>
+      <%= image_tag book_comment.user.get_profile_image, size:"100x100" %><br>
+      <%= book_comment.user.name %>
+    <% end %>
+    <%= book_comment %>
+    <% if book_comment.user == current_user %>
+      
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model%>
+</div>
