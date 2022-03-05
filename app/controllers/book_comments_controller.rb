@@ -7,6 +7,11 @@ class BookCommentsController < ApplicationController
     redirect_back(fallback_location: books_path)
   end
   def destroy
-    
+
+  end
+
+  private
+  def book_comment_params
+    params.require(:book_comment).permit(:comment)
   end
 end
