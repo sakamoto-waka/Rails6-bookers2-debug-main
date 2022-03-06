@@ -8,6 +8,17 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_one_attached :profile_image
+  
+  # Relationshipの中のカラムを区別するために実質２分割[relationships(中身はfollower_id)とreverse_of_relationships(中身はfollowed_id)]する
+  # フォローした人(Follower)へのアソシエーション　→　'follower_id'によって、あっちの:followerと結びついた
+  has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
+  # フォローされた人(Followed)へのアソシエーション　→　'followed_id'によってあっちの:followedと結びついた
+  has_many :reverse_of_relationships, class_name: 'Relashionship', foreign_key: 'followed_id', dependent: :destroy
+  
+  # 一覧画面で使用
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+  
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
