@@ -9,10 +9,11 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_one_attached :profile_image
   
-  # Relationshipの中のカラムを区別するために実質２分割[relationships(中身はfollower_id)とreverse_of_relationships(中身はfollowed_id)]する
-  # フォローした人(Follower)へのアソシエーション　→　'follower_id'によって、あっちの:followerと結びついた
+  # Relationshipの中のカラムを区別するために,
+  # 実質２分割[relationships(中身はfollower_id)とreverse_of_relationships(中身はfollowed_id)]する
+  # フォローした人(Follower)とのアソシエーション　→　'follower_id'によって、あっちと✗（の:followerと）結びついた
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
-  # フォローされた人(Followed)へのアソシエーション　→　'followed_id'によってあっちの:followedと結びついた
+  # フォローされた人(Followed)とのアソシエーション　→　'followed_id'によって、あっちと✗（の:followedと）結びついた
   has_many :reverse_of_relationships, class_name: 'Relashionship', foreign_key: 'followed_id', dependent: :destroy
   
   # 一覧画面で使用
@@ -27,5 +28,15 @@ class User < ApplicationRecord
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  end
+  
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  def unfollow
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  def following?(user)
+    followings.include?(user)
   end
 end
