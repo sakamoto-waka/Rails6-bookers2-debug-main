@@ -15,11 +15,11 @@ class Book < ApplicationRecord
     if search == 'perfect_match'
       Book.where(title: word)
     elsif search == 'forward_match'
-      Book.where('title LIKE ? OR body LIKE ?', word + '%', word + '%')
+      Book.where('title LIKE ? OR body LIKE ?', "#{word}%", "#{word}%")
     elsif search == 'backward_match'
-      Book.where('title LIKE ? OR body LIKE ?', '%' + word, '%' + word)
+      Book.where('title LIKE ? OR body LIKE ?', "%#{word}", "%#{word}")
     else
-      Book.where('title LIKE ? OR body LIKE ?', '%' + word + '%', '%' + word + '%')
+      Book.where('title LIKE ? OR body LIKE ?', "%#{word}%", "%#{word}%")
     end
   end
 end
