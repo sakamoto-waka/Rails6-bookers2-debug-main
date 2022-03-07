@@ -44,6 +44,7 @@ class User < ApplicationRecord
   end
   
   def self.looks(search, word)
+    
     if search == 'perfect_match'
       User.where('name LIKE?', "#{word}")
     elsif search == 'forward_match'
