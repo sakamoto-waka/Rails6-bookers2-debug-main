@@ -1,7 +1,6 @@
 <% if users.empty? %>
   <p>ユーザーはいません</p>
 <% else %>
-  <% users.each do |user| %>
     <table class="table">
       <thead>
         <tr>
@@ -13,6 +12,7 @@
         </tr>
       </thead>
       <tbody>
+      <% users.each do |user| %>
           <tr>
             <th><%= image_tag user.get_profile_image, size: '50x50' %></th>
             <th><%= user.name %></th>
@@ -20,7 +20,7 @@
             <td>フォロワー数: <%= user.followers.count %></td>
             <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
           </tr>
+        <% end %>
       </tbody>
     </table>
-  <% end %>
 <% end %>
