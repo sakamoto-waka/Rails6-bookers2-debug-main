@@ -2,25 +2,23 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-  
+
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
-  
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
-  end  
-  
+  end
+
    def self.looks(search, word)
     if search == 'perfect_match'
-      @book = Book.where(['title like? OR body like?', "#{word}", "#{word}"])
+      Book.where(['title like? OR body like?', "#{word}", "#{word}"])
     elsif search == 'forward_match'
-      @book = Book.where(['title like? OR body like?', "#{word}%", "#{word}%"])
+      Book.where(['title like? OR body like?', "#{word}%", "#{word}%"])
     elsif search == 'backward_match'
-      @book = Book.where(['title like? OR body like?', "%#{word}", "%#{word}"])
-    elsif  search == 'partial_match'
-      @book = Book.where(['title like? OR body like?', "%#{word}%", "%#{word}%"])
-    else    
-      @user = User.all
-    end  
-  end  
+      Book.where(['title like? OR body like?', "%#{word}", "%#{word}"])
+    else
+      Book.where(['title like? OR body like?', "%#{word}%", "%#{word}%"])
+    end
+  end
 end
