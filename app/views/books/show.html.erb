@@ -28,9 +28,9 @@
           <% end %>
         </tr>
       </table>
-      <table id="book_comments">
-        <%= render 'book_comments/book_comments', book: @book %>
-      </table>
+      <div id="book_comments" class="d-block">
+            <%= render 'book_comments/book_comments', book: @book %>
+      </div>
       <div id="comment_form">
         <%= render 'book_comments/comment_form', book: @book, book_comment: @book_comment %>
       </div>
