@@ -6,7 +6,7 @@
   </td>
 <% else %>
   <td>
-    <%= link_to book_favorites_path(book), method: :post, remote :true do %>,
+    <%= link_to book_favorites_path(book), method: :post, remote:true do %>,
         <i class="fas fa-heart"></i><%= book.favorites.count %>
     <% end %>
   </td>
