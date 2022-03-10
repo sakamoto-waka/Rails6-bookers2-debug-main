@@ -1,4 +1,7 @@
 <% book.book_comments.each do |book_comment| %>
+  <div id="comments_error">
+    <%= render 'layouts/errors', obj: book_comment %>
+  </div>
   <tr>
     <td>
       <%= link_to(book_comment.user) do %>
