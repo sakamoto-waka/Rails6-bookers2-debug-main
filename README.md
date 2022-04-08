@@ -1,4 +1,4 @@
-# README
+# 応用課題7以降の土台
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
